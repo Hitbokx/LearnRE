@@ -1,7 +1,7 @@
 #include <iostream> 
 #include <random>
 
-void userInput2();
+bool playAgain();
 
 int generateRandomNumber()
 {
@@ -49,7 +49,7 @@ void userInput()
 			{
 				std::cout << "Correct! You win! \n";
 				std::cout << '\n';
-				userInput2();
+				while(playAgain());
 			}
 		}
 	}
@@ -58,58 +58,26 @@ void userInput()
 	{
 		std::cout << "Sorry, you lose. The correct number was " << rNumber << '\n';
 		std::cout << '\n';
-		userInput2();
+		while (playAgain());
 	}
-
-
-	/*
-
-	int count = 1;
-	do
-	{
-		std::cout << "Guess #" << count << ": \n";
-		std::cin >> input;
-
-		if (input > rNumber)
-		{
-			std::cout << "Your guess is too high. \n";
-		}
-
-		if (input < rNumber)
-		{
-			std::cout << "Your guess is too low. \n";
-		}
-
-		++count;
-
-	} while (input != rNumber);
-
-
-	std::cout << "Guess #" << count << ": \n";
-	std::cout << "Correct! You win!";
-	std::cout << '\n';
-
-	*/
 
 }
 
-void userInput2()
+bool playAgain()
 {
-	std::cout << "Would you like to play again (y/n)?";
-	char input{};
-	std::cin >> input;
-
-	switch (input)
+	while (true)
 	{
-		case 'y':
-			userInput();
-			return;
-		case 'n':
-			std::cout << "Thank you for playing.\n";
-			return;
-		default:
-			std::cout << "Would you like to play again (y/n)?";
-			std::cin >> input;		
+		char input{};
+		std::cout << "Would You like to play again(y/n)?";
+		std::cin >> input;
+
+		switch (input)
+		{
+			case 'y':
+				return true;
+			case 'n':
+				return false;
+		}
 	}
 }
 
