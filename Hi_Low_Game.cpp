@@ -23,7 +23,7 @@ void userInput()
 	int input{};
 	int count{};
 
-	for (int count{ 1 }; count <= 7; ++count)
+	for ( count= 1 ; count <= 7; ++count)
 	{
 		if (count != rNumber)
 		{
@@ -44,20 +44,21 @@ void userInput()
 			{
 				std::cout << "Your guess is too low. \n";
 			}
+
+			if (input == rNumber)
+			{
+				std::cout << "Correct! You win! \n";
+				std::cout << '\n';
+				userInput2();
+			}
 		}
-
-
 	}
 
-	if (count != rNumber)
+	if (input != rNumber)
 	{
 		std::cout << "Sorry, you lose. The correct number was " << rNumber << '\n';
-	}
-
-	if (input == rNumber)
-	{
-		std::cout << "Correct! You win! \n";
 		std::cout << '\n';
+		userInput2();
 	}
 
 
@@ -90,12 +91,6 @@ void userInput()
 
 	*/
 
-
-
-
-
-	userInput2();
-
 }
 
 void userInput2()
@@ -114,10 +109,9 @@ void userInput2()
 			return;
 		default:
 			std::cout << "Would you like to play again (y/n)?";
-			std::cin >> input;
+			std::cin >> input;		
 	}
 }
-
 
 int main()
 {
