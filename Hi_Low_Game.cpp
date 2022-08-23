@@ -34,7 +34,7 @@ void userInput()
 			{
 				std::cout << "Please enter a number between 1 and 100 if you don't want to waste your tries ;) :) \n";
 			}
-
+			 
 			if (input > rNumber)
 			{
 				std::cout << "Your guess is too high. \n";
@@ -49,7 +49,7 @@ void userInput()
 			{
 				std::cout << "Correct! You win! \n";
 				std::cout << '\n';
-				while(playAgain());
+				playAgain();
 			}
 		}
 	}
@@ -58,7 +58,8 @@ void userInput()
 	{
 		std::cout << "Sorry, you lose. The correct number was " << rNumber << '\n';
 		std::cout << '\n';
-		while (playAgain());
+		 playAgain();
+		
 	}
 
 }
@@ -74,8 +75,11 @@ bool playAgain()
 		switch (input)
 		{
 			case 'y':
+				userInput();
 				return true;
+				
 			case 'n':
+				std::cout << "Thank you for playing.\n";
 				return false;
 		}
 	}
