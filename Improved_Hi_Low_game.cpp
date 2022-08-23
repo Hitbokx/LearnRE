@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <random>
+#include <limits>
 
 bool playAgain();
 
@@ -14,27 +15,32 @@ int generateRandomNumber()
 	return rNumber(mt);
 }
 
-void userInput()
+void ignoreLine()
+{
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+}
+
+void validateInput()
 {
 	std::cout << "Let's play a game. I'm thinking of a number. You have 7 tries to guess what it is." << '\n';
+	int input{};
 
 	int rNumber{ generateRandomNumber() };
-
-	int input{};
 	int count{};
 
-	for ( count= 1 ; count <= 7; ++count)
+	for (count = 1; count <= 7; ++count)
 	{
-		if (input != rNumber)
+		if (input!= rNumber)
 		{
 			std::cout << "Guess #" << count << ": \n";
 			std::cin >> input;
+			ignoreLine();
 
 			if (input < 0 || input > 100)
 			{
 				std::cout << "Please enter a number between 1 and 100 if you don't want to waste your tries ;) :) \n";
 			}
-			 
+
 			if (input > rNumber)
 			{
 				std::cout << "Your guess is too high. \n";
@@ -44,24 +50,25 @@ void userInput()
 			{
 				std::cout << "Your guess is too low. \n";
 			}
+
 		}
 
 		if (input == rNumber)
-		{
-			std::cout << "Correct! You win! \n";
-			std::cout << '\n';
-			playAgain();
-		}
+			{
+				std::cout << "Correct! You win! \n";
+				std::cout << '\n';
+				playAgain();
+			}
+
 	}
+
 
 	if (input != rNumber)
 	{
 		std::cout << "Sorry, you lose. The correct number was " << rNumber << '\n';
 		std::cout << '\n';
-		 playAgain();
-		
+		playAgain();
 	}
-
 }
 
 bool playAgain()
@@ -69,16 +76,16 @@ bool playAgain()
 	while (true)
 	{
 		char input{};
-		std::cout << "Would You like to play again(y/n)? ";
+		std::cout << "Would You like to play again(y/n)? \t";
 		std::cin >> input;
 		std::cout << '\n';
 
 		switch (input)
 		{
 			case 'y':
-				userInput();
+				validateInput();
 				return true;
-				
+
 			case 'n':
 				std::cout << "Thank you for playing.\n";
 				return false;
@@ -92,6 +99,6 @@ bool playAgain()
 
 int main()
 {
-	userInput();
+	validateInput();
 	return 0;
 }
