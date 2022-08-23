@@ -71,6 +71,7 @@ bool playAgain()
 		char input{};
 		std::cout << "Would You like to play again(y/n)?";
 		std::cin >> input;
+		std::cout << '\n';
 
 		switch (input)
 		{
@@ -81,6 +82,10 @@ bool playAgain()
 			case 'n':
 				std::cout << "Thank you for playing.\n";
 				return false;
+
+			default:
+				std::cout << "Don't be oversmart and enter 'y' for 'yes' or 'n' for 'no'.\n";
+				std::cout << '\n';
 		}
 	}
 }
