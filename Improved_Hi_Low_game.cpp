@@ -97,9 +97,12 @@ bool playAgain()
 	while (true)
 	{
 		char input{};
-		std::cout << "Would You like to play again(y/n)? ";
-		std::cin >> input;
-		std::cout << '\n';
+		do 
+		{
+			std::cout << "Would You like to play again(y/n)? ";
+			std::cin >> input;
+			std::cout << '\n';
+		} while (errorInput());
 
 		switch (input)
 		{
