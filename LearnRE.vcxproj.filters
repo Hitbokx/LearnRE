@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Enum_pets.cpp">
+    <ClCompile Include="No_of_legs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
