@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Improved_Hi_Low_game.cpp">
+    <ClCompile Include="Enum_pets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
