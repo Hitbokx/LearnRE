@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="No_of_legs.cpp">
+    <ClCompile Include="Advertisement.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
