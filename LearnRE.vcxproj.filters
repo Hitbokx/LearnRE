@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="monsters.cpp">
+    <ClCompile Include="array_number.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
