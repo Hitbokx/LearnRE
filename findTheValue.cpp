@@ -3,7 +3,7 @@
 
 int* findValue(int* arr1, int* arr2, int value)
 {
-    for (arr1; arr1 < arr2; ++arr1)
+    for (arr1; arr1 != arr2; ++arr1)
     {
         if (*(arr1) == 20)
         {
