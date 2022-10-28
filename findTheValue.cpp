@@ -1,16 +1,17 @@
 #include <iostream>
 #include <iterator>
 
-int* findValue(int* arr1, int* arr2, int value)
+int* findValue(int* begin, int* end, int value)
 {
-    for (arr1; arr1 != arr2; ++arr1)
+    for (begin; begin != end; ++begin)
     {
-        if (*(arr1) == 20)
+        if (*(begin) == value)
         {
-            return arr1;
+            return begin;
         }
 
     }
+    return end;
 }
 
 int main()
