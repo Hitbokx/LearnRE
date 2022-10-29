@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="findTheValue.cpp">
+    <ClCompile Include="nameSorter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
