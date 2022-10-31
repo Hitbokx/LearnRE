@@ -27,7 +27,6 @@ std::vector<int> returnGrades(const vectorArray& students, int numStudents)
 	{
 		studentGrades[i] = { student.grades };
 		++i;
-
 	}
 	return studentGrades;
 }
