@@ -1,5 +1,6 @@
 #include <iostream>
 #include <array>
+#include <vector>
 #include <random>
 #include <algorithm>
 #include <ctime>
@@ -137,37 +138,42 @@ int getCardValue(const Card& card)
 	}
 }
 
-using PlayerDeck = std::array<Card, 2>;
+using PlayerDeck = std::vector<Card>;
+using DealerDeck = std::vector<Card>;
 
 bool playBlackJack(Deck& shuffledDeck)
 {
-	Card dealer{};
-	PlayerDeck player{};
 
+}
 
+PlayerDeck getPlayerDeck(Deck& shuffledDeck)
+{
+	PlayerDeck playerDeck{};
+	for (int i{ 0 }; i < 2; ++i)
+	{
+		playerDeck[i] = shuffledDeck[i];
+	}
+	return playerDeck;
 }
 
 std::string getInput()
 {
 	std::cout << "Please 'Hit' or 'Stand': ";
 	std::string input{};
-	std::cin >> input;
 	return input;
 }
 
-int playerTurn(PlayerDeck playerDeck)
+int calculateScore(PlayerDeck& playerDeck)
 {
 	std::string input{ getInput() };
-
-	for(int i{0};i<;)
-	getCardValue();
-
-	if (input == "Stand")
+	if (input == "Stand" || "stand")
 	{
-		std::reduce(playerDeck.begin(), playerDeck.begin());
-		return 
+		getCardValue(playerDeck[i])
+		return
 	}
 }
+
+
 
 int main()
 {
