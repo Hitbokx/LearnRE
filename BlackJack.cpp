@@ -1,5 +1,9 @@
 #include <iostream>
 #include <array>
+#include <random>
+#include <algorithm>
+#include <ctime>
+#include <cassert>
 
 enum class CardRank
 {
@@ -96,10 +100,51 @@ void printDeck(const Deck& deck)
 	}
 }
 
+using Deck = std::array<Card, 52>;
+
+Deck shuffleDeck( Deck& deck)
+{
+	std::random_device rd;
+	std::seed_seq ss{ rd(),rd(), rd(), rd(), rd(), rd(), rd(), rd() };
+	std::mt19937 mt{ ss };
+
+	//std::mt19937 mt{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
+
+	std::shuffle(deck.begin(), deck.end(), mt);
+	return deck;
+}
+
+int getCardValue(const Card& card)
+{
+	using enum CardRank;
+	switch (card.rank)
+	{
+		case rank_2:		return 2;
+		case rank_3:		return 3;
+		case rank_4:		return 4;
+		case rank_5:		return 5;
+		case rank_6:		return 6;
+		case rank_7:		return 7;
+		case rank_8:		return 8;
+		case rank_9:		return 9;
+		case rank_10:		return 10;
+		case rank_Jack:		return 10;
+		case rank_Queen:	return 10;
+		case rank_King:		return 10;
+		case rank_Ace:		return 11;
+		default:			assert(false && "Should never happen!");	return 0;
+	}
+}
+
 int main()
 {
 	auto deck{ createDeck() };
-	printDeck(deck);
+	auto shuffledDeck{ shuffleDeck(deck) };
+	printDeck(shuffledDeck);
+
+	std::cout << '\n';
+
+	std::cout << getCardValue(deck[3]) << '\n';
 
 	return 0;
 }
