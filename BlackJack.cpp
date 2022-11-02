@@ -49,7 +49,7 @@ void printCard(const Card& card)
 		case rank_7:		std::cout << '7';		break;
 		case rank_8:		std::cout << '8';		break;
 		case rank_9:		std::cout << '9';		break;
-		case rank_10:		std::cout << '10';		break;
+		case rank_10:		std::cout << "10";		break;
 		case rank_Jack:		std::cout << 'J';		break;
 		case rank_Queen:	std::cout << 'Q';		break;
 		case rank_King:		std::cout << 'K';		break;
@@ -68,28 +68,30 @@ void printCard(const Card& card)
 }
 
 using Deck = std::array<Card, 52>;
-using cardIndex = Deck::size_type;
 
 Deck createDeck()
 {	
 	Card card{};
 	Deck deck{};
-	for (int i{ 0 }; i < (static_cast<int>(CardSuit::max_suit)); ++i)
+
+	for (int i{ 0 }; i < (static_cast<int>(CardSuit::max_suit)); ++i)// 
 	{
-		for (int i{ 0 }; (static_cast<CardRank>(i)) < CardRank::max_rank; ++i)
+		card.suit = { static_cast<CardSuit>(i) };
+		for (int iterator{ 0 }; iterator < (static_cast<int>(CardRank::max_rank)); ++iterator)
 		{
-			card.suit={  };
+			card.rank = { static_cast<CardRank>(iterator) };
+			deck[iterator+13*i] = { card };
 		}
 	}
 
 	return deck;
 }
 
-void printDeck(Deck& deck)
+void printDeck(const Deck& deck)
 {
-	for (Card card : deck)
+	for (const Card& card : deck)
 	{
-		//printCard(card);
+		printCard(card);
 		std::cout << ' ';
 	}
 }
