@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <ctime>
 #include <cassert>
+#include <numeric>
 
 enum class CardRank
 {
@@ -133,6 +134,38 @@ int getCardValue(const Card& card)
 		case rank_King:		return 10;
 		case rank_Ace:		return 11;
 		default:			assert(false && "Should never happen!");	return 0;
+	}
+}
+
+using PlayerDeck = std::array<Card, 2>;
+
+bool playBlackJack(Deck& shuffledDeck)
+{
+	Card dealer{};
+	PlayerDeck player{};
+
+
+}
+
+std::string getInput()
+{
+	std::cout << "Please 'Hit' or 'Stand': ";
+	std::string input{};
+	std::cin >> input;
+	return input;
+}
+
+int playerTurn(PlayerDeck playerDeck)
+{
+	std::string input{ getInput() };
+
+	for(int i{0};i<;)
+	getCardValue();
+
+	if (input == "Stand")
+	{
+		std::reduce(playerDeck.begin(), playerDeck.begin());
+		return 
 	}
 }
 
