@@ -187,10 +187,15 @@ std::string getInput()
 int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCards)
 {
 	int playerScore{ 0 };
-	int numberOfAces{ 0 };
-	int aceValue{ 11 };
-	int maxScore{ 21 };
+	{
+		int playerScore{ 0 };
 
+		for (Card& card : playerDeck)
+		{
+			playerScore = playerScore + getCardValue(card);
+		}
+		std::cout << "Your current score is: " << playerScore << '\n';
+	}
 	std::string input{ getInput() };
 	
 	while (input == "Hit" || input == "hit")
@@ -200,10 +205,6 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		for (Card& card : playerDeck)
 		{
 			++playerCards;
-			if (getCardValue(card) == aceValue)
-			{
-				++numberOfAces;
-			}
 		}
 
 		int cardsUsed{ playerCards + dealerCards };
@@ -228,12 +229,7 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 			playerScore = playerScore + getCardValue(card);
 		}
 
-		while ((playerScore > 21) && (numberOfAces !=0))
-		{
-			playerScore -= aceValue;
-		}
-
-		std::cout << "Your current score is: " << playerScore << '\n';
+		std::cout << "Now your score is: " << playerScore << '\n';
 
 		return playerScore;
 	}
@@ -243,9 +239,6 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 {
 	int dealerScore{ 0 };
 	int maxDealerScore{ 17 };
-	int numberOfAces{ 0 };
-	int aceValue{ 11 };
-	int maxScore{ 21 };
 	
 	while (dealerScore <= maxDealerScore)
 	{
@@ -253,10 +246,6 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 		for (Card& card : dealerDeck)
 		{
 			++dealerCards;
-			if (getCardValue(card) == aceValue)
-			{
-				++numberOfAces;
-			}
 		}
 	
 		int cardsUsed{ playerCards + dealerCards };
@@ -267,17 +256,9 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 		dealerDeck.resize(cardsUsed-1);
 		dealerDeck[cardsUsed - 2] = cardDrawn;
 
-		for (Card& card : dealerDeck)
-		{
-			dealerScore = dealerScore + getCardValue(card);
-		}
-
-		while ((dealerScore > 21) && (numberOfAces != 0))
-		{
-			dealerScore -= aceValue;
-		}
+		dealerScore = dealerScore + getCardValue(cardDrawn);
 	}
-	std::cout << "Dealer's current score is: "<< dealerScore << '\n';
+	std::cout << "Dealer's current score is: " << dealerScore << '\n';
 
 	return dealerScore;
 }
