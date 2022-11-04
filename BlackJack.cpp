@@ -207,7 +207,6 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		}
 
 		int cardsUsed{ playerCards + dealerCards };
-		std::cout << cardsUsed << '\n';
 		int nextCard{ cardsUsed + 1 };
 
 		Card cardDrawn{ shuffledDeck[nextCard-1] };
@@ -215,12 +214,9 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		playerDeck.resize(cardsUsed);
 		playerDeck[cardsUsed-1] = cardDrawn;
 
-		for (Card& card : playerDeck)
-		{
-			printCard(card);
-			std::cout << ' ';
-		}
-		std::cout << '\n';
+		std::cout << "You got: ";
+		printCard(playerDeck[cardsUsed - 1]);
+		std::cout <<'\n';
 
 		input = getInput();
 	}
@@ -237,7 +233,7 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 			playerScore -= aceValue;
 		}
 
-		std::cout << playerScore << '\n';
+		std::cout << "Your current score is: " << playerScore << '\n';
 
 		return playerScore;
 	}
@@ -273,18 +269,15 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 
 		for (Card& card : dealerDeck)
 		{
-			printCard(card);
-			std::cout << ' ';
 			dealerScore = dealerScore + getCardValue(card);
 		}
-		std::cout << '\n';
 
 		while ((dealerScore > 21) && (numberOfAces != 0))
 		{
 			dealerScore -= aceValue;
 		}
 	}
-	std::cout << dealerScore << '\n';
+	std::cout << "Dealer's current score is: "<< dealerScore << '\n';
 
 	return dealerScore;
 }
@@ -319,9 +312,9 @@ BlackJack playBlackJack(Deck& shuffledDeck)
 	int playerCards{ getPlayerCards(playerDeck) };
 	int dealerCards{ getDealerCards(dealerDeck) };
 
-	int playerScore{ calculatePlayerScore(shuffledDeck,playerDeck,dealerCards) };
 	int dealerScore{ calculateDealerScore(shuffledDeck,dealerDeck,playerCards) };
-
+	int playerScore{ calculatePlayerScore(shuffledDeck,playerDeck,dealerCards) };
+	
 	if (dealerScore > maxScore || playerScore > dealerScore || playerScore > maxScore)
 		return BlackJack::win;
 
@@ -336,8 +329,6 @@ int main()
 {
 	auto deck{createDeck()};
 	auto shuffledDeck{ shuffleDeck(deck) };
-	printDeck(shuffledDeck);
-	std::cout << '\n';
 	
 	BlackJack blackJack{playBlackJack(shuffledDeck)};
 
