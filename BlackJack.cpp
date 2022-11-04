@@ -187,10 +187,12 @@ std::string getInput()
 int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCards)
 {
 	int playerScore{ 0 };
+	int numberOfAces{ 0 };
+	int aceValue{ 11 };
+	int maxScore{ 21 };
 
 	std::string input{ getInput() };
 	
-
 	while (input == "Hit" || input == "hit")
 	{
 		int playerCards{0};
@@ -198,6 +200,10 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		for (Card& card : playerDeck)
 		{
 			++playerCards;
+			if (getCardValue(card) == aceValue)
+			{
+				++numberOfAces;
+			}
 		}
 
 		int cardsUsed{ playerCards + dealerCards };
@@ -205,7 +211,6 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		int nextCard{ cardsUsed + 1 };
 
 		Card cardDrawn{ shuffledDeck[nextCard-1] };
-		//playerScore = playerScore+getCardValue(cardDrawn);
 		                                                                                                              
 		playerDeck.resize(cardsUsed);
 		playerDeck[cardsUsed-1] = cardDrawn;
@@ -226,6 +231,12 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		{
 			playerScore = playerScore + getCardValue(card);
 		}
+
+		while ((playerScore > 21) && (numberOfAces !=0))
+		{
+			playerScore -= aceValue;
+		}
+
 		std::cout << playerScore << '\n';
 
 		return playerScore;
@@ -236,6 +247,9 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 {
 	int dealerScore{ 0 };
 	int maxDealerScore{ 17 };
+	int numberOfAces{ 0 };
+	int aceValue{ 11 };
+	int maxScore{ 21 };
 	
 	while (dealerScore <= maxDealerScore)
 	{
@@ -243,13 +257,16 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 		for (Card& card : dealerDeck)
 		{
 			++dealerCards;
+			if (getCardValue(card) == aceValue)
+			{
+				++numberOfAces;
+			}
 		}
 	
 		int cardsUsed{ playerCards + dealerCards };
 		int nextCard{ cardsUsed + 1 };
 
 		Card cardDrawn{ shuffledDeck[nextCard-1] };
-		//dealerScore = dealerScore+getCardValue(cardDrawn);
 
 		dealerDeck.resize(cardsUsed-1);
 		dealerDeck[cardsUsed - 2] = cardDrawn;
@@ -261,6 +278,11 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 			dealerScore = dealerScore + getCardValue(card);
 		}
 		std::cout << '\n';
+
+		while ((dealerScore > 21) && (numberOfAces != 0))
+		{
+			dealerScore -= aceValue;
+		}
 	}
 	std::cout << dealerScore << '\n';
 
@@ -276,7 +298,6 @@ int getPlayerCards(PlayerDeck& playerDeck)
 	}
 	return playerCards;
 }
-
 
 int getDealerCards(DealerDeck& dealerDeck)
 {
