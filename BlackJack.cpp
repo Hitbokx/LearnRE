@@ -36,6 +36,13 @@ enum class CardSuit
 		max_suit,
 };
 
+enum class BlackJack
+{
+	win,
+	lose,
+	tie,
+};
+
 struct Card
 {
 	CardRank rank{};
@@ -281,7 +288,7 @@ int getDealerCards(DealerDeck& dealerDeck)
 	return dealerCards;
 }
 
-bool playBlackJack(Deck& shuffledDeck)
+BlackJack playBlackJack(Deck& shuffledDeck)
 {
 	int maxScore = 21;
 
@@ -294,19 +301,14 @@ bool playBlackJack(Deck& shuffledDeck)
 	int playerScore{ calculatePlayerScore(shuffledDeck,playerDeck,dealerCards) };
 	int dealerScore{ calculateDealerScore(shuffledDeck,dealerDeck,playerCards) };
 
-	if (playerScore > maxScore)
-	{
-		return false;
-	}
+	if (dealerScore > maxScore || playerScore > dealerScore || playerScore > maxScore)
+		return BlackJack::win;
 
-	if (dealerScore > maxScore || playerScore > dealerScore)
-	{
-		return true;
-	}
+	else if(dealerScore == playerScore)
+		return BlackJack::tie;
+	
 	else
-	{
-		return false;
-	}
+		return BlackJack::lose;
 }
 
 int main()
@@ -316,11 +318,15 @@ int main()
 	printDeck(shuffledDeck);
 	std::cout << '\n';
 	
-	bool blackJack{playBlackJack(shuffledDeck)};
-	if (blackJack)
-		std::cout << "You won!";
-	else
-		std::cout << "You lose!";
+	BlackJack blackJack{playBlackJack(shuffledDeck)};
 
+	switch (blackJack)
+	{
+		using enum BlackJack;
+		case win:	std::cout << "You won!";		break;
+		case lose:	std::cout << "You lost!";		break;
+		case tie:	std::cout << "It's a tie!";		break;
+	}
+	
 	return 0;
 }
