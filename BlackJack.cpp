@@ -141,49 +141,182 @@ int getCardValue(const Card& card)
 using PlayerDeck = std::vector<Card>;
 using DealerDeck = std::vector<Card>;
 
-bool playBlackJack(Deck& shuffledDeck)
-{
-
-}
-
 PlayerDeck getPlayerDeck(Deck& shuffledDeck)
 {
 	PlayerDeck playerDeck{};
-	for (int i{ 0 }; i < 2; ++i)
+
+	playerDeck.resize(2);
+	
+	for (int i{ 1 }; i < 3; i++)
 	{
-		playerDeck[i] = shuffledDeck[i];
+		playerDeck[i-1]={ shuffledDeck[i] };
 	}
 	return playerDeck;
+}
+
+DealerDeck getDealerDeck(Deck& shuffledDeck)
+{
+	DealerDeck dealerDeck{ };
+
+	dealerDeck.resize(1);
+	for (int i{ 0 }; i < 1; i++)
+	{
+		dealerDeck[i] = { shuffledDeck[i] };
+	}
+	
+	return dealerDeck;
 }
 
 std::string getInput()
 {
 	std::cout << "Please 'Hit' or 'Stand': ";
 	std::string input{};
+	std::cin >> input;
+
 	return input;
 }
 
-int calculateScore(PlayerDeck& playerDeck)
+int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCards)
 {
+	int playerScore{ 0 };
+
 	std::string input{ getInput() };
-	if (input == "Stand" || "stand")
+	
+
+	while (input == "Hit" || input == "hit")
 	{
-		getCardValue(playerDeck[i])
-		return
+		int playerCards{0};
+
+		for (Card& card : playerDeck)
+		{
+			++playerCards;
+		}
+
+		int cardsUsed{ playerCards + dealerCards };
+		std::cout << cardsUsed << '\n';
+		int nextCard{ cardsUsed + 1 };
+
+		Card cardDrawn{ shuffledDeck[nextCard-1] };
+		//playerScore = playerScore+getCardValue(cardDrawn);
+		                                                                                                              
+		playerDeck.resize(cardsUsed);
+		playerDeck[cardsUsed-1] = cardDrawn;
+
+		for (Card& card : playerDeck)
+		{
+			printCard(card);
+			std::cout << ' ';
+		}
+		std::cout << '\n';
+
+		input = getInput();
+	}
+
+	if (input == "Stand" || input == "stand")
+	{
+		for (Card& card : playerDeck)
+		{
+			playerScore = playerScore + getCardValue(card);
+		}
+		std::cout << playerScore << '\n';
+
+		return playerScore;
 	}
 }
 
+int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerCards)
+{
+	int dealerScore{ 0 };
+	
+	while (dealerScore <= 17)
+	{
+		int dealerCards{0};
+		for (Card& card : dealerDeck)
+		{
+			++dealerCards;
+		}
+	
+		int cardsUsed{ playerCards + dealerCards };
+		int nextCard{ cardsUsed + 1 };
 
+		Card cardDrawn{ shuffledDeck[nextCard-1] };
+		//dealerScore = dealerScore+getCardValue(cardDrawn);
+
+		dealerDeck.resize(cardsUsed-1);
+		dealerDeck[cardsUsed - 2] = cardDrawn;
+
+		for (Card& card : dealerDeck)
+		{
+			printCard(card);
+			std::cout << ' ';
+			dealerScore = dealerScore + getCardValue(card);
+		}
+		std::cout << '\n';
+	}
+	std::cout << dealerScore << '\n';
+
+	return dealerScore;
+}
+
+int getPlayerCards(PlayerDeck& playerDeck)
+{
+	int playerCards{ 0 };
+	for (Card& card : playerDeck)
+	{
+		++playerCards;
+	}
+	return playerCards;
+}
+
+
+int getDealerCards(DealerDeck& dealerDeck)
+{
+	int dealerCards{ 0 };
+	for (Card& card : dealerDeck)
+	{
+		++dealerCards;
+	}
+	return dealerCards;
+}
+
+bool playBlackJack(Deck& shuffledDeck)
+{
+	PlayerDeck playerDeck{ getPlayerDeck(shuffledDeck) };
+	DealerDeck dealerDeck{ getDealerDeck(shuffledDeck) };
+
+	int playerCards{ getPlayerCards(playerDeck) };
+	int dealerCards{ getDealerCards(dealerDeck) };
+
+	int playerScore{ calculatePlayerScore(shuffledDeck,playerDeck,dealerCards) };
+	int dealerScore{ calculateDealerScore(shuffledDeck,dealerDeck,playerCards) };
+
+	if (playerScore > 21)
+	{
+		return false;
+	}
+
+	if (dealerScore > 21 || playerScore > dealerScore)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 
 int main()
 {
-	auto deck{ createDeck() };
+	auto deck{createDeck()};
 	auto shuffledDeck{ shuffleDeck(deck) };
 	printDeck(shuffledDeck);
-
 	std::cout << '\n';
-
-	std::cout << getCardValue(deck[3]) << '\n';
+	
+	bool blackJack{playBlackJack(shuffledDeck)};
+	if (blackJack)
+		std::cout << "You won!";
+	else
+		std::cout << "You lose!";
 
 	return 0;
 }
