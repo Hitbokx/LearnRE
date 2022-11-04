@@ -106,11 +106,11 @@ using Deck = std::array<Card, 52>;
 
 Deck shuffleDeck( Deck& deck)
 {
-	std::random_device rd;
+	/*std::random_device rd;
 	std::seed_seq ss{ rd(),rd(), rd(), rd(), rd(), rd(), rd(), rd() };
-	std::mt19937 mt{ ss };
+	std::mt19937 mt{ ss };*/
 
-	//std::mt19937 mt{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
+	static std::mt19937 mt{ static_cast<std::mt19937::result_type>(std::time(nullptr)) };
 
 	std::shuffle(deck.begin(), deck.end(), mt);
 	return deck;
@@ -146,8 +146,9 @@ PlayerDeck getPlayerDeck(Deck& shuffledDeck)
 	PlayerDeck playerDeck{};
 
 	playerDeck.resize(2);
+	int usedCards{ 3 };
 	
-	for (int i{ 1 }; i < 3; i++)
+	for (int i{ 1 }; i < usedCards; i++)
 	{
 		playerDeck[i-1]={ shuffledDeck[i] };
 	}
@@ -227,8 +228,9 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerCards)
 {
 	int dealerScore{ 0 };
+	int maxDealerScore{ 17 };
 	
-	while (dealerScore <= 17)
+	while (dealerScore <= maxDealerScore)
 	{
 		int dealerCards{0};
 		for (Card& card : dealerDeck)
@@ -281,6 +283,8 @@ int getDealerCards(DealerDeck& dealerDeck)
 
 bool playBlackJack(Deck& shuffledDeck)
 {
+	int maxScore = 21;
+
 	PlayerDeck playerDeck{ getPlayerDeck(shuffledDeck) };
 	DealerDeck dealerDeck{ getDealerDeck(shuffledDeck) };
 
@@ -290,12 +294,12 @@ bool playBlackJack(Deck& shuffledDeck)
 	int playerScore{ calculatePlayerScore(shuffledDeck,playerDeck,dealerCards) };
 	int dealerScore{ calculateDealerScore(shuffledDeck,dealerDeck,playerCards) };
 
-	if (playerScore > 21)
+	if (playerScore > maxScore)
 	{
 		return false;
 	}
 
-	if (dealerScore > 21 || playerScore > dealerScore)
+	if (dealerScore > maxScore || playerScore > dealerScore)
 	{
 		return true;
 	}
