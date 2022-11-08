@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BlackJack.cpp">
+    <ClCompile Include="digitSum.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
