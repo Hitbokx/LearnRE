@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="digitSum.cpp">
+    <ClCompile Include="printBinary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
