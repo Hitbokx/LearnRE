@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="commandLineConvertToInt.cpp">
+    <ClCompile Include="bestStudent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
