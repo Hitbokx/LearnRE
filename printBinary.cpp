@@ -11,21 +11,38 @@ int getInput()
 
 void convert(int num)
 {
+	int uNumBit{ num % 2 };
+
 	if (num > 1)
-	{
 		convert(num / 2);
-	}
+
+	if (num < 0)
+	{
+		int uNum{ num  };
 		
-	std::cout << num % 2;
+		convert( uNum / 2);
+
+		uNumBit = (-(uNum) % 2);
+
+		if (uNumBit == 0)
+			uNumBit = 1;
+
+		if (uNumBit == 1)
+			uNumBit = 0;
+	}
+
+	std::cout <<uNumBit;
 }
 
 int main()
 {
-	while (true)
+	convert(-2);
+
+	/*while (true)
 	{
 		int input{ getInput() };
 		std::cout << "The binary representation of " << input << " is: ";
-		convert(input);
+		
 		std::cout << '\n';
 		std::cout << "Do you want to play again?('y' or 'n') ";
 		char ch{};
@@ -35,6 +52,9 @@ int main()
 			break;
 		std::cout << '\n';
 	}
-	
+	std::cout << "Thank you for playing.";
+	std::cout << '\n';
+	*/
+
 	return 0;
 }
