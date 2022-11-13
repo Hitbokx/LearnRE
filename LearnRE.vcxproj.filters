@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bestStudent.cpp">
+    <ClCompile Include="squareNuberGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
