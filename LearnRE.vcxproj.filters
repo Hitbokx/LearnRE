@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="binarySearch_Iterative.cpp">
+    <ClCompile Include="binarySearch_Recursion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
