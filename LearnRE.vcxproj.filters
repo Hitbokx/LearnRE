@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="squareNuberGame.cpp">
+    <ClCompile Include="binarySearch_Iterative.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
