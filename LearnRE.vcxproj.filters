@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="binarySearch_Recursion.cpp">
+    <ClCompile Include="BlackJack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

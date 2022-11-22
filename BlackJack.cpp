@@ -9,31 +9,31 @@
 
 enum class CardRank
 {
-		rank_2,
-		rank_3,
-		rank_4,
-		rank_5,
-		rank_6,
-		rank_7,
-		rank_8,
-		rank_9,
-		rank_10,
-		rank_Jack,
-		rank_Queen,
-		rank_King,
-		rank_Ace,
+	rank_2,
+	rank_3,
+	rank_4,
+	rank_5,
+	rank_6,
+	rank_7,
+	rank_8,
+	rank_9,
+	rank_10,
+	rank_Jack,
+	rank_Queen,
+	rank_King,
+	rank_Ace,
 
-		max_rank,
+	max_rank,
 };
 
 enum class CardSuit
 {
-		clubs,
-		diamonds,
-		hearts,
-		spades,
+	clubs,
+	diamonds,
+	hearts,
+	spades,
 
-		max_suit,
+	max_suit,
 };
 
 enum class BlackJack
@@ -67,7 +67,7 @@ void printCard(const Card& card)
 		case rank_Queen:	std::cout << 'Q';		break;
 		case rank_King:		std::cout << 'K';		break;
 		case rank_Ace:		std::cout << 'A';		break;
-		default:			std::cout << "????";	break;		
+		default:			std::cout << "????";	break;
 	}
 	switch (card.suit)
 	{
@@ -83,7 +83,7 @@ void printCard(const Card& card)
 using Deck = std::array<Card, 52>;
 
 Deck createDeck()
-{	
+{
 	Card card{};
 	Deck deck{};
 
@@ -93,7 +93,7 @@ Deck createDeck()
 		for (int iterator{ 0 }; iterator < (static_cast<int>(CardRank::max_rank)); ++iterator)
 		{
 			card.rank = { static_cast<CardRank>(iterator) };
-			deck[iterator+13*i] = { card };
+			deck[iterator + 13 * i] = { card };
 		}
 	}
 
@@ -111,7 +111,7 @@ void printDeck(const Deck& deck)
 
 using Deck = std::array<Card, 52>;
 
-Deck shuffleDeck( Deck& deck)
+Deck shuffleDeck(Deck& deck)
 {
 	/*std::random_device rd;
 	std::seed_seq ss{ rd(),rd(), rd(), rd(), rd(), rd(), rd(), rd() };
@@ -154,10 +154,10 @@ PlayerDeck getPlayerDeck(Deck& shuffledDeck)
 
 	playerDeck.resize(2);
 	int usedCards{ 3 };
-	
+
 	for (int i{ 1 }; i < usedCards; i++)
 	{
-		playerDeck[i-1]={ shuffledDeck[i] };
+		playerDeck[i - 1] = { shuffledDeck[i] };
 	}
 	return playerDeck;
 }
@@ -171,7 +171,7 @@ DealerDeck getDealerDeck(Deck& shuffledDeck)
 	{
 		dealerDeck[i] = { shuffledDeck[i] };
 	}
-	
+
 	return dealerDeck;
 }
 
@@ -186,7 +186,7 @@ std::string getInput()
 
 int maxScore{ 21 };
 
-int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCards)
+int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck, int dealerCards)
 {
 	int playerScore{ 0 };
 	{
@@ -196,13 +196,21 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		{
 			playerScore = playerScore + getCardValue(card);
 		}
-		std::cout << "You have score of: " << playerScore << '\n';
+		std::cout << "You have score of: " << playerScore << " and ";
+		std::cout << "your cards are: ";
+		for (Card& card : playerDeck)
+		{
+			printCard(card);
+			std::cout << ' ';
+			playerScore += getCardValue(card);
+		}
+		std::cout << '\n';
 	}
 	std::string input{ getInput() };
-	
-	while (input == "Hit" || input == "hit")
+
+	while (input == "Hit" || input == "hit" || input == "HIT")
 	{
-		int playerCards{0};
+		int playerCards{ 0 };
 
 		for (Card& card : playerDeck)
 		{
@@ -212,10 +220,10 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		int cardsUsed{ playerCards + dealerCards };
 		int nextCard{ cardsUsed + 1 };
 
-		Card cardDrawn{ shuffledDeck[nextCard-1] };
-		                                                                                                              
+		Card cardDrawn{ shuffledDeck[nextCard - 1] };
+
 		playerDeck.resize(cardsUsed);
-		playerDeck[cardsUsed-1] = cardDrawn;
+		playerDeck[cardsUsed - 1] = cardDrawn;
 		int playerScore1{ 0 };
 
 		std::cout << "Your cards are: ";
@@ -230,7 +238,7 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 		std::cout << "You were dealt a : ";
 		printCard(playerDeck[cardsUsed - 1]);
 		std::cout << " and now have: " << playerScore1;
-		std::cout <<'\n';
+		std::cout << '\n';
 
 		if (playerScore1 > maxScore)
 			return playerScore1;
@@ -245,7 +253,7 @@ int calculatePlayerScore(Deck& shuffledDeck, PlayerDeck& playerDeck,int dealerCa
 			playerScore += getCardValue(card);
 		}
 
-		std::cout << "Your current score is: "<< playerScore << '\n';
+		std::cout << "Your current score is: " << playerScore << '\n';
 
 		return playerScore;
 	}
@@ -263,18 +271,18 @@ int calculateDealerScore(Deck& shuffledDeck, DealerDeck& dealerDeck, int playerC
 	}
 	while (dealerScore < maxDealerScore)
 	{
-		int dealerCards{0};
+		int dealerCards{ 0 };
 		for (Card& card : dealerDeck)
 		{
 			++dealerCards;
 		}
-			
+
 		int cardsUsed{ playerCards + dealerCards };
 		int nextCard{ cardsUsed + 1 };
 
-		Card cardDrawn{ shuffledDeck[nextCard-1] };
-		
-		dealerDeck.resize(cardsUsed-1);
+		Card cardDrawn{ shuffledDeck[nextCard - 1] };
+
+		dealerDeck.resize(cardsUsed - 1);
 		dealerDeck[cardsUsed - 2] = cardDrawn;
 		cardDrawnValue += getCardValue(cardDrawn);
 
@@ -315,7 +323,7 @@ BlackJack playBlackJack(Deck& shuffledDeck)
 	int dealerCards{ getDealerCards(dealerDeck) };
 
 	int playerScore{ calculatePlayerScore(shuffledDeck,playerDeck,dealerCards) };
-	playerCards=getPlayerCards(playerDeck);
+	playerCards = getPlayerCards(playerDeck);
 	if (playerScore > maxScore)
 	{
 		std::cout << "You busted!\n";
@@ -323,14 +331,14 @@ BlackJack playBlackJack(Deck& shuffledDeck)
 	}
 
 	int dealerScore{ calculateDealerScore(shuffledDeck,dealerDeck,playerCards) };
-	dealerCards=getDealerCards(dealerDeck);
-	
+	dealerCards = getDealerCards(dealerDeck);
+
 	if (dealerScore > maxScore)
 	{
 		std::cout << "The dealer busted!\n";
 		return BlackJack::win;
 	}
-	
+
 	if (dealerScore < playerScore)
 	{
 		std::cout << "You outscored the Dealer!\n";
@@ -348,20 +356,20 @@ BlackJack playBlackJack(Deck& shuffledDeck)
 
 int main()
 {
-	auto deck{createDeck()};
+	auto deck{ createDeck() };
 	auto shuffledDeck{ shuffleDeck(deck) };
-	printDeck(shuffledDeck );
+	printDeck(shuffledDeck);
 	std::cout << '\n';
-	
-	BlackJack blackJack{playBlackJack(shuffledDeck)};
+
+	BlackJack blackJack{ playBlackJack(shuffledDeck) };
 
 	switch (blackJack)
 	{
 		using enum BlackJack;
-		case win:	std::cout << "You won!";		break;
-		case lose:	std::cout << "You lost!";		break;
-		case tie:	std::cout << "It's a tie!";		break;
+		case win:	std::cout << "YOU WON!";		break;
+		case lose:	std::cout << "YOU LOST!";		break;
+		case tie:	std::cout << "IT'S A TIE!";		break;
 	}
-	
+
 	return 0;
 }
