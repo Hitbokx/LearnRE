@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ConstructorQuiz.cpp" />
     <ClCompile Include="stack.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
