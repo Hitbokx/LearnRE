@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MonsterGenerator.cpp">
+    <ClCompile Include="BlackJackUpdated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
