@@ -98,7 +98,6 @@ public:
 };
 
 using DeckType = std::array<Card, 52>;
-//using Index = Deck::size_type;
 
 class Deck
 {
@@ -171,7 +170,6 @@ public:
         return m_score > g_maximumScore;
     }
 };
-
 
 bool playerWantsHit()
 {
@@ -282,5 +280,3 @@ int main()
 
     return 0;
 }
-
-
