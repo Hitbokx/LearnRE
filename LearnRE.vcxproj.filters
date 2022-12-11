@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BlackJackOOP.cpp">
+    <ClCompile Include="FractionCompare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
