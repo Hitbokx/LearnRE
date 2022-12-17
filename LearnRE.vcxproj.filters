@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="map.cpp">
+    <ClCompile Include="Average14.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
