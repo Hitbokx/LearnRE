@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Average14.cpp">
+    <ClCompile Include="IntArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
