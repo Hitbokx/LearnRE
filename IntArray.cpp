@@ -12,6 +12,14 @@ public:
 
 	IntArray(int size) :m_size{ size } { m_arr = new int[m_size]; }
 
+	IntArray(const IntArray& array): m_size{ array.m_size }
+	{
+		m_arr = new int[m_size];
+
+		for (int count{ 0 }; count < array.m_size; ++count)
+			m_arr[count] = array.m_arr[count];
+	}
+
 	//~IntArray() { delete[] m_arr; }
 
 	int& operator[] (int index);
