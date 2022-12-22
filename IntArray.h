@@ -33,6 +33,8 @@ public:
 		deepCopy(a);
 	}
 
+	IntArray(const IntArray&) = delete;
+
 	~IntArray()
 	{
 		delete[] m_data;
@@ -50,6 +52,35 @@ public:
 		assert(index >= 0 && index < m_length);
 		return m_data[index];
 	}
+
+	IntArray& operator=(std::initializer_list<int> list)
+	{
+		// deepCopy(list); 1st option
+		int length{ static_cast<int>(list.size()) };
+
+		if (length != m_length) // 2nd option
+		{
+			delete[] m_data;
+
+			m_length = length;
+			m_data = new int[length];
+		}
+		int count{ 0 };
+		for (auto element : list)
+		{
+			m_data[count] = element;
+			++count;
+		}
+		return *this;
+	}
+
+	IntArray& operator=(const IntArray& list)
+	{
+		deepCopy(list);
+		return *this;
+	}
+
+	IntArray& operator=(const IntArray& list) = delete;
 
 	int getLength() const { return m_length; }
 
