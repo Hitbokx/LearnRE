@@ -5,6 +5,13 @@
 #include <random>
 #include <cassert>
 
+int getRandomNumber( int min, int max )
+{
+	std::mt19937 mt{ std::random_device{}() };
+	std::uniform_int_distribution rNum{ min,max };
+	return rNum( mt );
+}
+
 class Creature
 {
 protected:
@@ -25,6 +32,10 @@ public:
 	int getGold( ) const{ return m_gold; }
 
 	void reduceHealth( int damage ){ m_health -= damage; }
+
+	void increaseHealth( int health ){ m_health += health; }
+
+	void increaseDamage( int damage ){ m_damage += damage; }
 
 	bool isDead( ){ return{ m_health <= 0 }; }
 
@@ -82,9 +93,7 @@ public:
 
 	static Monster getRandomMonster( )
 	{
-		std::mt19937 mt{ std::random_device{}() };
-		std::uniform_int_distribution monster{ 0, (static_cast<int>(Type::max_types) - 1) };
-		int rNum = monster( mt );
+		int rNum{ getRandomNumber( 0, (static_cast<int>(Type::max_types) - 1) ) };
 
 		return Monster{ static_cast<Type>(rNum) };
 	}
@@ -123,10 +132,9 @@ bool fightMonster( char input, Player& player, Monster& monster )
 {
 	if ( input == 'r' )
 	{
-		std::mt19937 mt{ std::random_device{}() };
-		std::uniform_int_distribution run{ 0,1 };
+		int run{ getRandomNumber( 0,1 ) };
 
-		if ( run( mt ) )
+		if ( run )
 		{
 			std::cout << "You successfully fled.\n";
 			std::cout << '\n';
@@ -187,6 +195,108 @@ void attackMonster( Player& player, Monster& monster )
 		std::cout << "You are now 'Level " << player.getLevel( ) << "'.\n";
 		std::cout << "You found " << monster.getGold( ) << " gold.\n";
 		std::cout << '\n';
+
+		// Different types of Potions
+
+		int potion{ getRandomNumber( 0,3 ) };
+		if ( potion )
+		{
+			std::cout << "You found a mythical potion! Do you want to drink it? [y/n]: ";
+			char input{};
+			std::cin >> input;
+
+			int potionEffect{ getRandomNumber( 1,3 ) };
+			if ( input == 'y' )
+			{
+				switch ( potion )
+				{
+					case 1:
+						{
+							switch ( potionEffect )
+							{
+								case 1:
+									{
+										player.increaseHealth( 2 );
+										std::cout << "Your health has been increased by drinking a 'Health increasing' potion which has a small effect."
+											<< "Your health has been increased by " << 2 << " points.\n";
+										break;
+									}
+								case 2:
+									{
+										player.increaseHealth( 2 );
+										std::cout << "Your health has been increased by drinking a 'Health increasing' potion which has a medium effect."
+											<< "Your health has been increased by " << 2 << " points.\n";
+										break;
+									}
+								case 3:
+									{
+										player.increaseHealth( 5 );
+										std::cout << "Your health has been increased by drinking a 'Health increasing' potion which has a large effect."
+											<< "Your health has been increased by " << 5 << " points.\n";
+										break;
+									}
+							}
+							break;
+						}
+					case 2:
+						{
+							switch ( potionEffect )
+							{
+								case 1:
+									{
+										player.increaseDamage( 2 );
+										std::cout << "Your damage has been increased by drinking a 'Strength increasing' potion which has a small effect."
+											<< "Your Damage has been increased by " << 2 << " points.\n";
+										break;
+									}
+								case 2:
+									{
+										player.increaseDamage( 3 );
+										std::cout << "Your damage has been increased by drinking a 'Strength increasing' potion which has a medium effect."
+											<< "Your damage has been increased by " << 2 << " points.\n";
+										break;
+									}
+								case 3:
+									{
+										player.increaseDamage( 5 );
+										std::cout << "Your damage has been increased by drinking a 'Strength increasing' potion which has a large effect."
+											<< "Your damage has been increased by " << 5 << " points.\n";
+										break;
+									}
+							}
+							break;
+						}
+					case 3:
+						{
+							switch ( potionEffect )
+							{
+								case 1:
+									{
+										player.reduceHealth( 1 );
+										std::cout << "Your health has been decreased by drinking a 'Health decreasing' poison which has a small effect."
+											<< "Your Health has been decreased by " << 2 << " points.\n";
+										break;
+									}
+								case 2:
+									{
+										player.reduceHealth( 1 );
+										std::cout << "Your health has been decreased by drinking a 'Health decreasing' poison which has a small effect."
+											<< "Your Health has been decreased by " << 2 << " points.\n";
+										break;
+									}
+								case 3:
+									{
+										player.reduceHealth( 2 );
+										std::cout << "Your health has been decreased by drinking a 'Health decreasing' poison which has a small effect."
+											<< "Your Health has been decreased by " << 2 << " points.\n";
+										break;
+									}
+							}
+							break;
+						}
+				}
+			}
+		}
 	}
 	else
 	{
