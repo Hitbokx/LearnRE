@@ -219,6 +219,9 @@ void attackMonster( Player& player, Monster& monster )
 										player.increaseHealth( 2 );
 										std::cout << "Your health has been increased by drinking a 'Health increasing' potion which has a small effect."
 											<< "Your health has been increased by " << 2 << " points.\n";
+
+										std::cout << "Now, your health is: " << player.getHealth( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 								case 2:
@@ -226,6 +229,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.increaseHealth( 2 );
 										std::cout << "Your health has been increased by drinking a 'Health increasing' potion which has a medium effect."
 											<< "Your health has been increased by " << 2 << " points.\n";
+										std::cout << "Now, your health is: " << player.getHealth( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 								case 3:
@@ -233,6 +238,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.increaseHealth( 5 );
 										std::cout << "Your health has been increased by drinking a 'Health increasing' potion which has a large effect."
 											<< "Your health has been increased by " << 5 << " points.\n";
+										std::cout << "Now, your health is: " << player.getHealth( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 							}
@@ -247,6 +254,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.increaseDamage( 2 );
 										std::cout << "Your damage has been increased by drinking a 'Strength increasing' potion which has a small effect."
 											<< "Your Damage has been increased by " << 2 << " points.\n";
+										std::cout << "Now, the damage given by you will be: " << player.getDamage( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 								case 2:
@@ -254,6 +263,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.increaseDamage( 3 );
 										std::cout << "Your damage has been increased by drinking a 'Strength increasing' potion which has a medium effect."
 											<< "Your damage has been increased by " << 2 << " points.\n";
+										std::cout << "Now, the damage given by you will be: " << player.getDamage( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 								case 3:
@@ -261,6 +272,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.increaseDamage( 5 );
 										std::cout << "Your damage has been increased by drinking a 'Strength increasing' potion which has a large effect."
 											<< "Your damage has been increased by " << 5 << " points.\n";
+										std::cout << "Now, the damage given by you will be: " << player.getDamage( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 							}
@@ -275,6 +288,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.reduceHealth( 1 );
 										std::cout << "Your health has been decreased by drinking a 'Health decreasing' poison which has a small effect."
 											<< "Your Health has been decreased by " << 2 << " points.\n";
+										std::cout << "Now, your health is: " << player.getHealth( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 								case 2:
@@ -282,6 +297,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.reduceHealth( 1 );
 										std::cout << "Your health has been decreased by drinking a 'Health decreasing' poison which has a small effect."
 											<< "Your Health has been decreased by " << 2 << " points.\n";
+										std::cout << "Now, your health is: " << player.getHealth( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 								case 3:
@@ -289,6 +306,8 @@ void attackMonster( Player& player, Monster& monster )
 										player.reduceHealth( 2 );
 										std::cout << "Your health has been decreased by drinking a 'Health decreasing' poison which has a small effect."
 											<< "Your Health has been decreased by " << 2 << " points.\n";
+										std::cout << "Now, your health is: " << player.getHealth( ) << ".\n";
+										std::cout << '\n';
 										break;
 									}
 							}
