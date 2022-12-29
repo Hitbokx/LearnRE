@@ -175,7 +175,7 @@ public:
 
 	void print()
 	{
-		for (int i{ 0 }; i < 10; ++i)
+		for (int i{ 0 }; i < m_length; ++i)
 		{
 			std::cout << (*this)[i] << ' ';
 		}
